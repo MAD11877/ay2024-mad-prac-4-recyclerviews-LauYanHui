@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user = new User("John Doe","MAD Developer",1,false);
+        Intent intent = getIntent();
+        User user = (User)intent.getSerializableExtra("user");
         TextView tvName = findViewById(R.id.tvName);
         TextView tvDescription = findViewById(R.id.tvDescription);
         Button btnFollow = findViewById(R.id.btnFollow);
         Random rand = new Random();
         int randomNum = rand.nextInt(100);
-        tvName.setText(user.name + " " + randomNum);
+        tvName.setText(user.name);
         tvDescription.setText(user.description);
         if (user.followed) {
             btnFollow.setText("Unfollow");
