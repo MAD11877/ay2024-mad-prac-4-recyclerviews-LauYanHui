@@ -14,4 +14,11 @@ public class User implements Serializable {
         this.followed = followed;
 
     }
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
