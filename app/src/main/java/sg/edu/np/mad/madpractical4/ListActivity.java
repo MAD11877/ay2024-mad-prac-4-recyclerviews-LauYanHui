@@ -31,25 +31,6 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Profile");
-        builder.setMessage("MADness");
-        builder.setCancelable(true);
-        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton("View", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-                Intent activityname = new Intent(ListActivity.this, MainActivity.class);
-                startActivity(activityname);
-            }
-        });
-
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -70,12 +51,15 @@ public class ListActivity extends AppCompatActivity {
             userList.add(user);
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         UserAdapter userAdapter =  new UserAdapter(userList,this);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(userAdapter);
+        ImageView imageview = findViewById(R.id.ivSmallImage);
+
 
 
     }

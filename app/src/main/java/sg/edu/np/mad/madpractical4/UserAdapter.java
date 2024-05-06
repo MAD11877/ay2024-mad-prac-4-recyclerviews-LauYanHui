@@ -17,81 +17,61 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
+//
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
-    Context context;
-    ArrayList<User> userList;
+    private ArrayList<User> userlist;
+
+    public UserAdapter(ArrayList<User> UserList, ListActivity activity) {
+        this.userlist = UserList;
+    }
+
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_activity_list, parent, false);
+        UserViewHolder holder = new UserViewHolder(view);
+        return holder;
+    }
+
+    public void onBindViewHolder(UserViewHolder holder, int position) {
+        User List_item = userlist.get(position);
+        holder.name.setText(List_item.getName());
+        holder.description.setText(List_item.getDescription());
+        User user = userlist.get(position);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Profile");
+                builder.setMessage(user.getName());
+                builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("View", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(v.getContext(), MainActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", user);
+                        intent.putExtras(bundle);
+                        v.getContext().startActivity(intent);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                ;
+
+            }
+        });
+    }
+
+    public int getItemCount() {
+        return userlist.size();
+    }
 
 
-        public UserAdapter(ArrayList<User> userList, Context context) {
-            this.context = context;
-            this.userList = userList;
-        }
-
-
-        public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            // Create a new LinearLayout
-            LinearLayout layout = new LinearLayout(parent.getContext());
-            layout.setOrientation(LinearLayout.HORIZONTAL);
-            layout.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            // Create a new ImageView
-            ImageView imageView = new ImageView(parent.getContext());
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageView.setImageResource(R.mipmap.ic_launcher);
-
-            // Inflate the existing layout
-            View item = LayoutInflater.from(parent.getContext()).inflate(
-                    android.R.layout.simple_list_item_2, null, false);
-
-            // Add the ImageView and the existing layout to the LinearLayout
-            layout.addView(imageView);
-            layout.addView(item);
-
-            return new UserViewHolder(layout); // Pass the LinearLayout to the ViewHolder
-        }
-
-
-
-        public void onBindViewHolder(UserViewHolder holder, int position) {
-            User user = userList.get(position);
-            holder.name.setText(user.name);
-            holder.description.setText(user.description);
-            holder.imageView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context );
-                    builder.setTitle("Profile");
-                    builder.setMessage(user.name);
-                    builder.setCancelable(true);
-                    builder.setPositiveButton("Close",new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int id){
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton(  "View",new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int id){
-                            dialog.dismiss();
-                            Intent activityname = new Intent(context,MainActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("user",user);
-                            activityname.putExtras(bundle);
-                            context.startActivity(activityname);
-                        }
-                    });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-            });
-        }
-        @Override
-        public int getItemCount() {
-            return userList.size();
-        }
 
 
 }
-
