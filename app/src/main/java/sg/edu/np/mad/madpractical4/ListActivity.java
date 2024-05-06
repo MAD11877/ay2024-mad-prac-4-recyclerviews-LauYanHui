@@ -71,7 +71,7 @@ public class ListActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        User.UserAdapter userAdapter = new User.UserAdapter(this,userList);
+        UserAdapter userAdapter =  new UserAdapter(this,userList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
