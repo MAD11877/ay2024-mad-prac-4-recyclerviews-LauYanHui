@@ -18,12 +18,13 @@ import java.util.ArrayList;
 
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
+    Context context;
     ArrayList<User> userList;
-        Context context;
+
 
         public UserAdapter(Context context,ArrayList<User> userList) {
-            this.userList = userList;
             this.context = context;
+            this.userList = userList;
         }
 
 
