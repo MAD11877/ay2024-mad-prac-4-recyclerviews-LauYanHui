@@ -76,8 +76,6 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(userAdapter);
 
-
-
     }
 
     public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
