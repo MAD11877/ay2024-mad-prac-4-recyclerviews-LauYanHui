@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
@@ -70,99 +71,101 @@ public class ListActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        UserAdapter userAdapter = new UserAdapter(userList);
+        User.UserAdapter userAdapter = new User.UserAdapter(this,userList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(userAdapter);
 
+
     }
 
-    public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-        ArrayList<User> userList;
+//    public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+//        ArrayList<User> userList;
+//
+//        public UserAdapter(ArrayList<User> userList) {
+//            this.userList = userList;
+//        }
+//
+//        @Override
+//        public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//            // Create a new LinearLayout
+//            LinearLayout layout = new LinearLayout(parent.getContext());
+//            layout.setOrientation(LinearLayout.HORIZONTAL);
+//            layout.setLayoutParams(new ViewGroup.LayoutParams(
+//                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//
+//            // Create a new ImageView
+//            ImageView imageView = new ImageView(parent.getContext());
+//            imageView.setLayoutParams(new ViewGroup.LayoutParams(
+//                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//            imageView.setImageResource(R.mipmap.ic_launcher);
+//
+//            // Inflate the existing layout
+//            View item = LayoutInflater.from(parent.getContext()).inflate(
+//                    android.R.layout.simple_list_item_2, null, false);
+//
+//            // Add the ImageView and the existing layout to the LinearLayout
+//            layout.addView(imageView);
+//            layout.addView(item);
+//
+//            return new UserViewHolder(layout); // Pass the LinearLayout to the ViewHolder
+//        }
+//
+//
+//        @Override
+//        public void onBindViewHolder(UserViewHolder holder, int position) {
+//            User user = userList.get(position);
+//            holder.name.setText(user.name);
+//            holder.description.setText(user.description);
+//            holder.imageView.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View v){
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this );
+//                    builder.setTitle("Profile");
+//                    builder.setMessage(user.name);
+//                    builder.setCancelable(true);
+//                    builder.setPositiveButton("Close",new DialogInterface.OnClickListener(){
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int id){
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                    builder.setNegativeButton(  "View",new DialogInterface.OnClickListener(){
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int id){
+//                            dialog.dismiss();
+//                            Intent activityname = new Intent(ListActivity.this,MainActivity.class);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putSerializable("user",user);
+//                            activityname.putExtras(bundle);
+//                            startActivity(activityname);
+//                        }
+//                    });
+//                    AlertDialog alert = builder.create();
+//                    alert.show();
+//                }
+//            });
+//
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return userList.size();
+//        }
+//
+//        public class UserViewHolder extends RecyclerView.ViewHolder {
+//            TextView name;
+//            TextView description;
+//            ImageView imageView;
+//
+//            public UserViewHolder(View itemView) {
+//                super(itemView);
+//                name = itemView.findViewById(android.R.id.text1);
+//                description = itemView.findViewById(android.R.id.text2);
+//                imageView = (ImageView)((ViewGroup)itemView).getChildAt(0);
+//            }
+//        }
+//    }
 
-        public UserAdapter(ArrayList<User> userList) {
-            this.userList = userList;
-        }
-
-        @Override
-        public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            // Create a new LinearLayout
-            LinearLayout layout = new LinearLayout(parent.getContext());
-            layout.setOrientation(LinearLayout.HORIZONTAL);
-            layout.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            // Create a new ImageView
-            ImageView imageView = new ImageView(parent.getContext());
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            imageView.setImageResource(R.mipmap.ic_launcher);
-
-            // Inflate the existing layout
-            View item = LayoutInflater.from(parent.getContext()).inflate(
-                    android.R.layout.simple_list_item_2, null, false);
-
-            // Add the ImageView and the existing layout to the LinearLayout
-            layout.addView(imageView);
-            layout.addView(item);
-
-            return new UserViewHolder(layout); // Pass the LinearLayout to the ViewHolder
-        }
-
-
-        @Override
-        public void onBindViewHolder(UserViewHolder holder, int position) {
-            User user = userList.get(position);
-            holder.name.setText(user.name);
-            holder.description.setText(user.description);
-            holder.imageView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this );
-                    builder.setTitle("Profile");
-                    builder.setMessage(user.name);
-                    builder.setCancelable(true);
-                    builder.setPositiveButton("Close",new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int id){
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton(  "View",new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog, int id){
-                            dialog.dismiss();
-                            Intent activityname = new Intent(ListActivity.this,MainActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("user",user);
-                            activityname.putExtras(bundle);
-                            startActivity(activityname);
-                        }
-                    });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return userList.size();
-        }
-
-        public class UserViewHolder extends RecyclerView.ViewHolder {
-            TextView name;
-            TextView description;
-            ImageView imageView;
-
-            public UserViewHolder(View itemView) {
-                super(itemView);
-                name = itemView.findViewById(android.R.id.text1);
-                description = itemView.findViewById(android.R.id.text2);
-                imageView = (ImageView)((ViewGroup)itemView).getChildAt(0);
-            }
-        }
-    }
 }
