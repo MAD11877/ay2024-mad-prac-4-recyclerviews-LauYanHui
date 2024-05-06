@@ -21,4 +21,7 @@ public class User implements Serializable {
     public String getDescription() {
         return description;
     }
+    public boolean getFollowed() {
+        return followed;
+    }
 }
