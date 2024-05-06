@@ -61,8 +61,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                ;
-
             }
         });
     }
