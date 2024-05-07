@@ -58,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(userAdapter);
-        ImageView imageview = findViewById(R.id.ivSmallImage);
+
 
 
 

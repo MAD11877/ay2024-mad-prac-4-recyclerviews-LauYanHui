@@ -21,6 +21,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
             name = itemView.findViewById(R.id.tvName);
             imageView = itemView.findViewById(R.id.ivSmallImage);
             description = itemView.findViewById(R.id.tvDescription);
+
     }
 
 }
